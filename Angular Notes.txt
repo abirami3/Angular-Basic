@@ -1,0 +1,18 @@
+Angular Notes:
+
+* Components  - basic building blocks
+
+* Data Biniding - communication b/w ts and html
+
+ --> String Interpolation
+ --> property Binding
+ --> event Binding
+
+ --> Two way data binding [()]
+
+* Directives - Instructions in DOM
+
+ngIf, ngFor - strucutral Directive
+ngStyle, ngClass - Attribute Directive
+
+((model._totalRecords > 8 && model._numInsertedRecords > 0) || (model._totalRecords > 0 && model._numInsertedRecords > 1))
