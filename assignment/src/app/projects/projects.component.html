@@ -1,0 +1,52 @@
+<div>
+  <div class="header">
+  <mat-form-field class="search">
+    <input  matInput type="text" name="search" placeholder="Enter The search Value" [(ngModel)]="searchText">
+  </mat-form-field>
+  <button mat-raised-button  routerLink="create/project">Create</button>
+  </div>
+    <table class="table-container">
+      <tr>
+      <td class="heading">
+        Project Name
+      </td>
+      <td class="heading">
+        Project Code
+      </td>
+      <td class="heading">
+        Project Manager
+      </td>
+      <td class="heading">
+        Project Start Date
+      </td>
+      <td class="heading">
+        Project End Date
+      </td>
+      <td class="heading">
+        Project Budget
+      </td>
+    </tr>
+      <tr routerLink="project/{{project.id}}" *ngFor="let project of projects  | filters: searchText  ">
+        <td>
+         {{project.project_name}}
+        </td>
+        <td>
+         {{project.project_code}}
+        </td>
+        <td>
+          {{project.project_manager}}
+        </td>
+        <td>
+          {{project.project_start_date}}
+        </td>
+        <td>
+          {{project.project_end_date}}
+        </td>
+        <td>
+          {{project.project_budget | currency}}
+        </td>
+      </tr>
+
+    </table>
+
+</div>

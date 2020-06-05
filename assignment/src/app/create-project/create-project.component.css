@@ -1,0 +1,14 @@
+#container1{
+    display: grid;
+    flex-direction: column;
+    width:45%;
+margin-top:20px;
+}
+.button1{
+    margin-left: 70%;
+}
+.team{
+    padding-left:10px;
+}
+
+

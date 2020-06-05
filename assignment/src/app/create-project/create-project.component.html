@@ -1,0 +1,92 @@
+<form [formGroup]="myForm">
+    <div class="button1">
+        <button mat-raised-button color="primary" type="submit" [disabled]="myForm.invalid" (click)="createProject()">Create</button>
+        <button mat-raised-button type="reset" color="gray" (click)="reset()">Reset</button>
+        <button mat-raised-button color="gray" (click)=goBack()>Cancel</button>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6" id="container1">
+                <mat-form-field>
+                    <input matInput placeholder="Project Name" formControlName="project_name">
+                    <mat-error *ngIf="project_name.invalid && project_name.touched">
+                        <div *ngIf="project_name.errors?.pattern">Project Name should like (Ex: Xxxx)</div>
+                        <div *ngIf="project_name.errors.maxlength">Project Name should contains only 50 characters </div>
+                        <div *ngIf="project_name.errors.required"> Project Name is required</div>
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field>
+                    <input matInput placeholder="Project Code" formControlName="project_code">
+                    <mat-error *ngIf="project_code.invalid && project_code.touched">
+                        <div *ngIf="project_code.errors?.pattern">Project code should like (Ex: PJXXX, PJYYY)</div>
+                        <div *ngIf="project_code.errors.required"> Project code is required</div>
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field>
+                    <input matInput placeholder="Project Manager Name" formControlName="project_manager">
+                    <mat-error *ngIf="project_manager.invalid && project_manager.touched">
+                        <div *ngIf="project_manager.errors?.pattern">Project Manager Name should like (Ex: Xxxx Y)</div>
+                        <div *ngIf="project_manager.errors.required"> Project Manager Name is required</div>
+                        <div *ngIf="project_manager.errors.maxlength">Manager Name should contains only 40 characters </div>
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field>
+                    <input matInput [matDatepicker]="myDatepicker" placeholder="Project Start Date" formControlName="project_start_date">
+                    <mat-datepicker-toggle matSuffix [for]="myDatepicker"></mat-datepicker-toggle>
+                    <mat-datepicker #myDatepicker></mat-datepicker>
+                    <mat-error *ngIf="project_start_date.invalid && project_start_date.touched">
+                        Project Start Date is required
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field>
+                    <input matInput [matDatepicker]="mydatepicker" [min]="date || start_date" placeholder="Project End Date" formControlName="project_end_date">
+                    <mat-datepicker-toggle matSuffix [for]="mydatepicker"></mat-datepicker-toggle>
+                    <mat-datepicker #mydatepicker></mat-datepicker>
+                    <mat-error *ngIf="project_end_date.invalid && project_end_date.touched">
+                        <div *ngIf="project_end_date.errors.required"> Project End Date is required</div>
+
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field>
+                    <input type="number" matInput placeholder="Project Budget(in $)" formControlName="project_budget">
+                    <mat-error *ngIf="project_budget.invalid && project_budget.touched">
+                        Project Budget is required
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field>
+                    <input matInput placeholder="Project Description" formControlName="project_description">
+                </mat-form-field>
+
+            </div>
+            <div class="col-lg-6" id="container2">
+                <div formArrayName="team_members">
+                    <h4>Project members</h4>
+                    <div *ngFor="let member of teamArray.controls; let i = index" [formGroupName]="i" class="team">
+
+                        <mat-form-field>
+                            <input matInput placeholder="Team Member Id" formControlName="member_id">
+                            <mat-error *ngIf="member.hasError('required', 'member_id') && member.controls['member_id'].touched">
+                                Member Id is required
+                            </mat-error>
+                            <mat-error *ngIf="member.hasError('pattern', 'member_id') && member.controls['member_id'].touched">
+                                Member id should like (Eg:ACE000)
+                            </mat-error>
+                        </mat-form-field>
+                        <mat-form-field>
+                            <input matInput placeholder="Team Member Name" formControlName="member_name">
+                            <mat-error *ngIf="member.hasError('required', 'member_name') && member.controls['member_name'].touched">
+                                Member Name is required
+                            </mat-error>
+                            <mat-error *ngIf="member.hasError('pattern', 'member_name') && member.controls['member_name'].touched">
+                                Member Name should like (Eg:Xxxx Y)
+                            </mat-error>
+                        </mat-form-field>
+                        <button mat-raised-button color="warn" (click)="deleteMembers(i)">Delete Member</button>
+                    </div>
+                </div>
+                <button mat-raised-button color="primary" (click)="addMembers()">Add Team Member</button>
+            </div>
+        </div>
+    </div>
+</form>
